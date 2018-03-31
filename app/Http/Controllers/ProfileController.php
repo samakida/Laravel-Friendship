@@ -17,23 +17,15 @@ class ProfileController extends Controller
     public function index($id)
     {
         $user = User::findOrFail($id);
-        $pic = (object) array();
-
-        $picpath = public_path() . '/img/profile/' . Auth::user()->id . "/" . Auth::user()->pic;
-        if (File::exists($picpath)) {
-            $pic->auth = 'profile/' . Auth::user()->id . "/" . Auth::user()->pic;
-        } else {
-            $pic->auth = Auth::user()->gender . '.png';
-        }
 
         $picpath = public_path() . '/img/profile/' . $user->id . "/" . $user->pic;
         if (File::exists($picpath)) {
-            $pic->other = 'profile/' . $user->id . "/" . $user->pic;
+            $user->pic = 'profile/' . $user->id . "/" . $user->pic;
         } else {
-            $pic->other = $user->gender . '.png';
+            $user->pic = $user->gender . '.png';
         }
 
-        return view('profile.index')->with(compact('user', 'pic'));
+        return view('profile.index')->with(compact('user'));
     }
 
     public function uploadePhoto(Request $request)

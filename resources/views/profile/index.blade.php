@@ -17,7 +17,7 @@
                     <div class="col-md-4">
                         Welcom to you profile
 
-                        <img class="img-thumbnail" src="{{ asset('img') }}/{{ $pic->other }}" alt="{{ $user->name }}" width="100%">
+                        <img class="img-thumbnail" src="{{ asset('img') }}/{{ $user->pic }}" alt="{{ $user->name }}" width="100%">
 
                         <br>
                         @if (Auth::user()->id == $user->id)

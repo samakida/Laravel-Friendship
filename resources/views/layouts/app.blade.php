@@ -48,7 +48,11 @@
                         @else
                             <li>
                                 <a href="{{ url('/profile')}}">
-                                    <img class="img-thumbnail" src="{{ asset('img') }}/{{ $pic->auth }}" alt="{{ $user->name }}" width="40px">
+                                    @if (File::exists(public_path() . '/img/profile/' . Auth::user()->id . "/" . Auth::user()->pic))
+                                        <img class="img-thumbnail" src="{{ asset('img/profile') }}/{{ Auth::user()->id }}/{{ Auth::user()->pic }}" alt="{{ Auth::user()->name }}" width="40px">
+                                    @else
+                                        <img class="img-thumbnail" src="{{ asset('img') }}/{{ Auth::user()->gender }}.png" alt="{{ Auth::user()->name }}" width="40px">
+                                    @endif
                                 </a>
                             </li>
                             <li class="nav-item dropdown">

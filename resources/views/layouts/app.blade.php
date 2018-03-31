@@ -35,7 +35,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @auth
-                            <li><a class="nav-link" href="{{ url('/profile')}}/{{ Auth::user()->slug }}">Profile</a></li>
+                            <li><a class="nav-link" href="{{ url('/profile')}}">Profile</a></li>
                         @endauth
                     </ul>
 
@@ -46,9 +46,14 @@
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
+                            <li>
+                                <a href="{{ url('/profile')}}">
+                                    <img class="img-thumbnail" src="{{ asset('img') }}/{{ $pic->auth }}" alt="{{ $user->name }}" width="40px">
+                                </a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ ucwords(Auth::user()->name) }} <span class="caret"></span>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">

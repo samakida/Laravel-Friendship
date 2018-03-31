@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,10 +19,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['middleware' => 'auth'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
-
-    Route::get('/profile/{slug}', 'ProfileController@index');
+    Route::get('/profile/{id}', 'ProfileController@index');
+    Route::get('/profile', function () {
+        return redirect()->action(
+            'ProfileController@index', ['id' => Auth::user()->id]
+        );
+    });
+    Route::post('/uploadephoto', 'ProfileController@uploadePhoto')->name('uploadephoto');
 });
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');

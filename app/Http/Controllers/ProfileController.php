@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
 {
@@ -11,9 +14,48 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug)
+    public function index($id)
     {
-        return view('profile.index');
+        $user = User::findOrFail($id);
+        $pic = (object) array();
+
+        $picpath = public_path() . '/img/profile/' . Auth::user()->id . "/" . Auth::user()->pic;
+        if (File::exists($picpath)) {
+            $pic->auth = 'profile/' . Auth::user()->id . "/" . Auth::user()->pic;
+        } else {
+            $pic->auth = Auth::user()->gender . '.png';
+        }
+
+        $picpath = public_path() . '/img/profile/' . $user->id . "/" . $user->pic;
+        if (File::exists($picpath)) {
+            $pic->other = 'profile/' . $user->id . "/" . $user->pic;
+        } else {
+            $pic->other = $user->gender . '.png';
+        }
+
+        return view('profile.index')->with(compact('user', 'pic'));
+    }
+
+    public function uploadePhoto(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|mimes:jpeg,jpg,png,gif|max:10000',
+        ]);
+
+        $image = $request->file('image');
+
+        $path = public_path() . '/img/profile/' . Auth::user()->id . "/";
+        if (!File::exists($path)) {
+            File::makeDirectory($path, '0777', true);
+        }
+
+        $name = Auth::user()->id . "_" . time() . "_" . $image->getClientOriginalName();
+        if ($image->move($path, $name)) {
+            User::where('id', Auth::user()->id)
+                ->update(['pic' => $name]);
+        }
+
+        return back();
     }
 
     /**

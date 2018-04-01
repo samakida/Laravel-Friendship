@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Profile;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -88,9 +89,18 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        $user = Auth::user();
+
+        $picpath = public_path() . '/img/profile/' . $user->id . "/" . $user->pic;
+        if (File::exists($picpath)) {
+            $user->pic = 'profile/' . $user->id . "/" . $user->pic;
+        } else {
+            $user->pic = $user->gender . '.png';
+        }
+
+        return view('profile.edit')->with(compact('user'));
     }
 
     /**
@@ -100,9 +110,12 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        Profile::where('user_id', Auth::user()->id)
+            ->update($request->except('_token'));
+
+        return back();
     }
 
     /**

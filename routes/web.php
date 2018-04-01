@@ -26,7 +26,9 @@ Route::middleware(['auth'])->group(function () {
         return redirect()->action(
             'ProfileController@index', ['id' => Auth::user()->id]
         );
-    });
+    })->name('profile');
+    Route::get('/editprofile', 'ProfileController@edit')->name('editprofile');
+    Route::post('/editprofile', 'ProfileController@update');
     Route::post('/uploadephoto', 'ProfileController@uploadePhoto')->name('uploadephoto');
 });
 

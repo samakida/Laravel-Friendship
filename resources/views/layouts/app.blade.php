@@ -10,9 +10,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -49,9 +46,9 @@
                             <li>
                                 <a href="{{ url('/profile')}}">
                                     @if (File::exists(public_path() . '/img/profile/' . Auth::user()->id . "/" . Auth::user()->pic))
-                                        <img class="img-thumbnail" src="{{ asset('img/profile') }}/{{ Auth::user()->id }}/{{ Auth::user()->pic }}" alt="{{ Auth::user()->name }}" width="40px">
+                                        <img class="rounded-circle" src="{{ asset('img/profile') }}/{{ Auth::user()->id }}/{{ Auth::user()->pic }}" alt="{{ Auth::user()->name }}" width="40px">
                                     @else
-                                        <img class="img-thumbnail" src="{{ asset('img') }}/{{ Auth::user()->gender }}.png" alt="{{ Auth::user()->name }}" width="40px">
+                                        <img class="rounded-circle" src="{{ asset('img') }}/{{ Auth::user()->gender }}.png" alt="{{ Auth::user()->name }}" width="40px">
                                     @endif
                                 </a>
                             </li>
@@ -61,6 +58,7 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('editprofile') }}">Edit Profile</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -82,5 +80,9 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
 </body>
 </html>

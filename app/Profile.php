@@ -13,8 +13,8 @@ class Profile extends Model
         'about',
     ];
 
-    public function profile()
+    public function user()
     {
-        return $this->hasOne('App\Profile');
+        return $this->belongsTo('App\User');
     }
 }

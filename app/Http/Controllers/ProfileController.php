@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Friendship;
 use App\Profile;
 use App\User;
 use Illuminate\Http\Request;
@@ -91,7 +92,7 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        $user = Auth::user();
+        $user = User::findOrFail(Auth::user()->id);
 
         $picpath = public_path() . '/img/profile/' . $user->id . "/" . $user->pic;
         if (File::exists($picpath)) {
@@ -127,5 +128,49 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function findFriend()
+    {
+        $allUsers = User::where('id', '!=', Auth::user()->id)->get();
+
+        foreach ($allUsers as $key => $user) {
+            $picpath = public_path() . '/img/profile/' . $user->id . "/" . $user->pic;
+            if (File::exists($picpath)) {
+                $user->pic = 'profile/' . $user->id . "/" . $user->pic;
+            } else {
+                $user->pic = $user->gender . '.png';
+            }
+
+            $requested = Friendship::where('requester', Auth::user()->id)
+                ->where('user_requested', $user->id)
+                ->first();
+
+            if ($requested == '') {
+                $user->requested = 0;
+            } else {
+                $user->requested = 1;
+            }
+
+            $allUsers->$key = $user;
+        }
+
+        $user = User::findOrFail(Auth::user()->id);
+
+        $picpath = public_path() . '/img/profile/' . $user->id . "/" . $user->pic;
+        if (File::exists($picpath)) {
+            $user->pic = 'profile/' . $user->id . "/" . $user->pic;
+        } else {
+            $user->pic = $user->gender . '.png';
+        }
+
+        return view('profile.find')->with(compact('allUsers', 'user'));
+    }
+
+    public function sendRequest(Request $request)
+    {
+        Auth::user()->addFriend($request->id);
+
+        return back();
     }
 }

@@ -33,6 +33,7 @@
                     <ul class="navbar-nav mr-auto">
                         @auth
                             <li><a class="nav-link" href="{{ url('/profile')}}">Profile</a></li>
+                            <li><a class="nav-link" href="{{ route('findfriend') }}">Find Friend</a></li>
                         @endauth
                     </ul>
 

@@ -27,7 +27,9 @@
                             <div class="img-thumbnail">
                                 <img class="rounded-circle" src="{{ asset('img') }}/{{ $user->pic }}" alt="{{ $user->name }}" width="100%">
                                 <h5>{{ $user->profile->city }} - {{ $user->profile->country }}</h5>
-                                <a class="btn" role="button" href="{{ route('editprofile') }}">Edit Profile</a>
+                                @if (Auth::user()->id == $user->id)
+                                    <a class="btn" role="button" href="{{ route('editprofile') }}">Edit Profile</a>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-8">

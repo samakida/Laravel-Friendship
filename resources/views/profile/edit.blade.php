@@ -29,10 +29,10 @@
                                 <img class="rounded-circle" src="{{ asset('img') }}/{{ $user->pic }}" alt="{{ $user->name }}" width="100%">
                                 <h5>{{ $user->profile->city }} - {{ $user->profile->country }}</h5>
                                 @if (Auth::user()->id == $user->id)
-                                    {{ Form::open(array('route' => 'uploadephoto', 'files' => true)) }}
+                                    {!! Form::open(array('route' => 'uploadephoto', 'files' => true)) !!}
                                         <div class="form-group">
-                                        {{ Form::label('image', 'Change Photo') }}
-                                        {{ Form::file('image', ['class' => 'form-control-file']) }}
+                                        {!! Form::label('image', 'Change Photo') !!}
+                                        {!! Form::file('image', ['class' => 'form-control-file']) !!}
                                         @if ($errors->has('image'))
                                             <span class="text-danger">
                                                 <strong>{{ $errors->first('image') }}</strong>
@@ -40,28 +40,28 @@
                                         @endif
                                         </div>
                                         <div class="text-right">
-                                            {{ Form::submit('Upload', ['class' => 'btn']) }}
+                                            {!! Form::submit('Upload', ['class' => 'btn']) !!}
                                         </div>
-                                    {{ Form::close() }}
+                                    {!! Form::close() !!}
                                 @endif
                             </div>
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">Update Profile</h5>
-                                {{ Form::open(array('route' => 'editprofile')) }}
+                                {!! Form::open(array('route' => 'editprofile')) !!}
                                 <div class="form-group">
-                                    {{ Form::label('city', 'City Name') }}
-                                    {{ Form::text('city', $user->profile->city, ['class' => 'form-control', 'placeholder' => 'City Name']) }}
-                                    {{ Form::label('country', 'Country Name') }}
-                                    {{ Form::text('country', $user->profile->country, ['class' => 'form-control', 'placeholder' => 'Country Name']) }}
-                                    {{ Form::label('about', 'About') }}
-                                    {{ Form::textarea('about', $user->profile->about, ['class' => 'form-control', 'rows' => '3']) }}
+                                    {!! Form::label('city', 'City Name') !!}
+                                    {!! Form::text('city', $user->profile->city, ['class' => 'form-control', 'placeholder' => 'City Name']) !!}
+                                    {!! Form::label('country', 'Country Name') !!}
+                                    {!! Form::text('country', $user->profile->country, ['class' => 'form-control', 'placeholder' => 'Country Name']) !!}
+                                    {!! Form::label('about', 'About') !!}
+                                    {!! Form::textarea('about', $user->profile->about, ['class' => 'form-control', 'rows' => '3']) !!}
                                 </div>
                                 <div class="text-right">
-                                    {{ Form::submit('Update', ['class' => 'btn']) }}
+                                    {!! Form::submit('Update', ['class' => 'btn']) !!}
                                 </div>
-                                {{ Form::close() }}
+                                {!! Form::close() !!}
                             </div>
                         </div>
                     </div>

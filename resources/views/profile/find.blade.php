@@ -35,7 +35,7 @@
                                 <strong>{{ $user->name }}</strong>
                             </a></h3>
                             <strong>Gende: </strong>{{ ucwords($user->gender) }}<br>
-                            {{ $user->profile->city }} - {{ $user->profile->country }}
+                            <i class="ion-earth"></i> {{ $user->profile->city }} - {{ $user->profile->country }}
                         </div>
                         <div class="col-3">
                             @if ($user->requested)

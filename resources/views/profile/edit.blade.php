@@ -27,7 +27,7 @@
                         <div class="col-md-4">
                             <div class="img-thumbnail text-center">
                                 <img class="rounded-circle" src="{{ asset('img') }}/{{ $user->pic }}" alt="{{ $user->name }}" width="100%">
-                                {{ $user->profile->city }} - {{ $user->profile->country }}
+                                <i class="ion-earth"></i> {{ $user->profile->city }} - {{ $user->profile->country }}
                                 {!! Form::open(array('route' => 'uploadephoto', 'files' => true)) !!}
                                     <div class="form-group">
                                     {!! Form::label('image', 'Change Photo') !!}

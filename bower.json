@@ -1,0 +1,20 @@
+{
+  "name": "Friendship",
+  "description": "",
+  "main": "",
+  "authors": [
+    "SaMa[KiD]a"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Ionicons": "ionicons#^2.0.1"
+  }
+}

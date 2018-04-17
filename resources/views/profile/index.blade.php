@@ -27,7 +27,7 @@
                             <div class="img-thumbnail">
                                 <img class="rounded-circle" src="{{ asset('img') }}/{{ $user->pic }}" alt="{{ $user->name }}" width="100%">
                                 {{ ucwords($user->gender) }}<br>
-                                {{ $user->profile->city }} - {{ $user->profile->country }}<br>
+                                <i class="ion-earth"></i> {{ $user->profile->city }} - {{ $user->profile->country }}<br>
                                 @if (Auth::user()->id == $user->id)
                                     <a href="{{ route('editprofile') }}"><button type="button" class="btn">Edit Profile</button></a>
                                 @endif

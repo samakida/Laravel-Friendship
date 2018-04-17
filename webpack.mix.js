@@ -12,4 +12,6 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+   .sass('resources/assets/sass/app.scss', 'public/css')
+   .copy('bower_components/Ionicons/css/ionicons.css', 'public/css/ionicons.css')
+   .copyDirectory('bower_components/Ionicons/fonts', 'public/fonts');

@@ -7,6 +7,7 @@ use App\Profile;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
@@ -172,5 +173,35 @@ class ProfileController extends Controller
         Auth::user()->addFriend($request->id);
 
         return back();
+    }
+
+    public function requests()
+    {
+        $friendship = DB::table('friendships')
+            ->join('users', 'users.id', '=', 'friendships.requester')
+            ->where('friendships.user_requested', '=', Auth::user()->id)
+            ->get();
+
+        foreach ($friendship as $key => $user) {
+            $picpath = public_path() . '/img/profile/' . $user->id . "/" . $user->pic;
+            if (File::exists($picpath)) {
+                $user->pic = 'profile/' . $user->id . "/" . $user->pic;
+            } else {
+                $user->pic = $user->gender . '.png';
+            }
+
+            $friendship->$key = $user;
+        }
+
+        $user = User::findOrFail(Auth::user()->id);
+
+        $picpath = public_path() . '/img/profile/' . $user->id . "/" . $user->pic;
+        if (File::exists($picpath)) {
+            $user->pic = 'profile/' . $user->id . "/" . $user->pic;
+        } else {
+            $user->pic = $user->gender . '.png';
+        }
+
+        return view('profile.request')->with(compact('friendship', 'user'));
     }
 }

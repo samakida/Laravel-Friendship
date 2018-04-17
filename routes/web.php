@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/findfriend', 'ProfileController@findFriend')->name('findfriend');
     Route::post('/addfriend', 'ProfileController@sendRequest')->name('addfriend');
+    Route::get('/requests', 'ProfileController@requests')->name('requests');
 });
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');

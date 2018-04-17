@@ -6,7 +6,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Find Friend</li>
+            <li class="breadcrumb-item active" aria-current="page">My Requests</li>
         </ol>
     </nav>
 
@@ -23,10 +23,10 @@
                         </div>
                     @endif
 
-                    @foreach ($allUsers as $user)
+                    @foreach ($friendship as $user)
                     <div class="row">
-                        <div class="col-3 text-center">
-                            <div class="img-thumbnail">
+                        <div class="col-3">
+                            <div class="img-thumbnail text-center">
                                 <img class="rounded-circle" src="{{ asset('img') }}/{{ $user->pic }}" alt="{{ $user->name }}" height="80px">
                             </div>
                         </div>
@@ -35,19 +35,15 @@
                                 <strong>{{ $user->name }}</strong>
                             </a></h3>
                             <strong>Gende: </strong>{{ ucwords($user->gender) }}<br>
-                            {{ $user->profile->city }} - {{ $user->profile->country }}
+                            <strong>Email: </strong>{{ $user->email }}
                         </div>
                         <div class="col-3">
-                            @if ($user->requested)
-                                <button type="button" class="btn" disabled>Friend Request Sent</button>
-                            @else
                             <div class="form-group">
-                                {!! Form::open(['route' => 'addfriend']) !!}
-                                {!! Form::hidden('id', $user->id) !!}
-                                {!! Form::submit('Add Friend', ['class' => 'btn']) !!}
-                                {!! Form::close() !!}
+                                {{-- {!! Form::open(['route' => 'addfriend']) !!} --}}
+                                {{-- {!! Form::hidden('id', $user->id) !!} --}}
+                                {!! Form::submit('Confirm', ['class' => 'btn']) !!}
+                                {{-- {!! Form::close() !!} --}}
                             </div>
-                            @endif
                         </div>
                     </div><hr>
                     @endforeach

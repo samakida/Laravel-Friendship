@@ -18,7 +18,6 @@
                                 <select name="gender" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}">
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
-                                    option
                                 </select>
 
                                 @if ($errors->has('gender'))

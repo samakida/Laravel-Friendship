@@ -26,9 +26,10 @@
                         <div class="col-md-4 text-center">
                             <div class="img-thumbnail">
                                 <img class="rounded-circle" src="{{ asset('img') }}/{{ $user->pic }}" alt="{{ $user->name }}" width="100%">
-                                <h5>{{ $user->profile->city }} - {{ $user->profile->country }}</h5>
+                                {{ ucwords($user->gender) }}<br>
+                                {{ $user->profile->city }} - {{ $user->profile->country }}<br>
                                 @if (Auth::user()->id == $user->id)
-                                    <a class="btn" role="button" href="{{ route('editprofile') }}">Edit Profile</a>
+                                    <a href="{{ route('editprofile') }}"><button type="button" class="btn">Edit Profile</button></a>
                                 @endif
                             </div>
                         </div>

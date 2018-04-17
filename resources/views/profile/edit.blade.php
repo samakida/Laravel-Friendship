@@ -27,23 +27,21 @@
                         <div class="col-md-4">
                             <div class="img-thumbnail text-center">
                                 <img class="rounded-circle" src="{{ asset('img') }}/{{ $user->pic }}" alt="{{ $user->name }}" width="100%">
-                                <h5>{{ $user->profile->city }} - {{ $user->profile->country }}</h5>
-                                @if (Auth::user()->id == $user->id)
-                                    {!! Form::open(array('route' => 'uploadephoto', 'files' => true)) !!}
-                                        <div class="form-group">
-                                        {!! Form::label('image', 'Change Photo') !!}
-                                        {!! Form::file('image', ['class' => 'form-control-file']) !!}
-                                        @if ($errors->has('image'))
-                                            <span class="text-danger">
-                                                <strong>{{ $errors->first('image') }}</strong>
-                                            </span>
-                                        @endif
-                                        </div>
-                                        <div class="text-right">
-                                            {!! Form::submit('Upload', ['class' => 'btn']) !!}
-                                        </div>
-                                    {!! Form::close() !!}
-                                @endif
+                                {{ $user->profile->city }} - {{ $user->profile->country }}
+                                {!! Form::open(array('route' => 'uploadephoto', 'files' => true)) !!}
+                                    <div class="form-group">
+                                    {!! Form::label('image', 'Change Photo') !!}
+                                    {!! Form::file('image', ['class' => 'form-control-file']) !!}
+                                    @if ($errors->has('image'))
+                                        <span class="text-danger">
+                                            <strong>{{ $errors->first('image') }}</strong>
+                                        </span>
+                                    @endif
+                                    </div>
+                                    <div class="text-right">
+                                        {!! Form::submit('Upload', ['class' => 'btn']) !!}
+                                    </div>
+                                {!! Form::close() !!}
                             </div>
                         </div>
                         <div class="col-md-8">
